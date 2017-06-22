@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="zh-hans" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="robots" content="NONE,NOARCHIVE" />
+    <title>资源总览 | 资源管理平台</title>
+
+    <link href="/static/xadmin/vendor/bootstrap/css/bootstrap.css" type="text/css" media="screen" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" id="site-theme" href="/static/xadmin/css/themes/bootstrap-xadmin.css" />
+
+    <link href="/static/xadmin/vendor/font-awesome/css/font-awesome.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="/static/xadmin/css/xadmin.main.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="/static/xadmin/css/xadmin.plugins.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="/static/xadmin/css/xadmin.responsive.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="/static/xadmin/css/xadmin.form.css" type="text/css" media="screen" rel="stylesheet" />
+
+
+    <style type="text/css">
+        .btn-toolbar{margin-top: 0;}
+        #content-block.full-content{margin-left: 0;}
+    </style>
+
+    <script type="text/javascript" src="/static/xadmin/vendor/jquery/jquery.js"></script>
+
+    <script type="text/javascript">
+        window.__admin_media_prefix__ = "/static/xadmin/";
+        window.__admin_path_prefix__ = "/admin";
+        window.__admin_language_code__ = "zh-hans";
+    </script>
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+
+
+</head>
+<body class="change-list">
+
+<!-- Header -->
+  <div id="top-nav" class="navbar navbar-xs navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">资源管理平台</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav pull-right">
+        
+
+
+
+<li class="dropdown g-add">
+  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+  <i class="fa fa-plus"></i> <span class="hide-sm">增加 <i class="caret"></i></span></a>
+  <ul id="g-add-menu" class="dropdown-menu" role="menu">
+    
+        <li><a href="/admin/auth/permission/add/"><i class="fa fa-plus"></i> 增加 权限</a></li>
+    
+        <li><a href="/admin/app/emailverifyrecord/add/"><i class="fa fa-plus"></i> 增加 Email verify record</a></li>
+    
+        <li><a href="/admin/xadmin/userwidget/add/"><i class="fa fa-plus"></i> 增加 用户小组件</a></li>
+    
+        <li><a href="/admin/auth/group/add/"><i class="fa fa-plus"></i> 增加 组</a></li>
+    
+        <li><a href="/admin/auth/user/add/"><i class="fa fa-plus"></i> 增加 用户</a></li>
+    
+        <li><a href="/admin/xadmin/usersettings/add/"><i class="fa fa-plus"></i> 增加 用户设置</a></li>
+    
+        <li><a href="/admin/xadmin/log/add/"><i class="fa fa-plus"></i> 增加 日志</a></li>
+    
+        <li><a href="/admin/xadmin/bookmark/add/"><i class="fa fa-plus"></i> 增加 书签</a></li>
+    
+        <li><a href="/admin/app/resource_list/add/"><i class="fa fa-plus"></i> 增加 Resource_list</a></li>
+    
+  </ul>
+</li>
+
+
+
+
+<li class="dropdown g-setlang">
+  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+  <i class="fa fa-globe"></i> <span class="hide-sm">
+    简体中文
+    <i class="caret"></i></span></a>
+  <form id="setlang-form" action="/admin/i18n/setlang/" method="post" style="display:none;">
+    <input type='hidden' name='csrfmiddlewaretoken' value='1SLUNezs4N096pbouXsOEujQJ1CKKxDt' />
+    <input name="next" type="hidden" value="/admin/app/emailverifyrecord/" />
+    <input id="setlang-id_language" name="language" type="hidden" value="zh-hans" />
+  </form>
+  <ul id="g-setlang-menu" class="dropdown-menu" role="menu">
+    
+    
+      <li><a data-lang="en"><i class="fa fa-flag"></i> English (en)</a></li>
+    
+      <li class="active"><a data-lang="zh-hans"><i class="fa fa-flag"></i> 简体中文 (zh-hans)</a></li>
+    
+  </ul>
+</li>
+<script type="text/javascript">
+  $(function(){
+    $('#g-setlang-menu a').click(function(e){
+      var lang = $(this).data('lang');
+      $('#setlang-form #setlang-id_language').attr('value', lang);
+      $('#setlang-form').submit();
+      
+      var topmenu = $('#top-nav .navbar-collapse');
+      if(topmenu.data('bs.collapse')) topmenu.collapse('hide');
+    })
+  })
+</script>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+            <strong>欢迎， admin</strong> <span class="caret"></span></a>
+            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+              <li><a href="/admin/account/password/"><i class="fa fa-key"></i> 更改密码</a></li>
+            </ul>
+          </li>
+        
+        <li><a href="/admin/logout/"><i class="show-sm fa fa-sign-out"></i><span class="hide-sm">注销</span></a></li>
+      </ul>
+      
+
+
+<form method="get" class="top-search-form navbar-form navbar-left" id="g-search">
+  <div class="input-group">
+    <input name="_q_" class="form-control" type="text">
+    <span class="input-group-btn">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-search"></i> 搜索 <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+      
+          <li><a data-action="/admin/app/resource_list/"><i class="fa fa-search"></i> 搜索Resource_list</a></li>
+      
+      </ul>
+    </span>
+  </div>
+</form>
+
+
+
+
+    </div>
+  </div>
+
+<div id="body-content" class="clearfix row">
+    <div id="left-side" class="col-sm-1 col-md-2">
+
+
+
+
+
+
+        <ul class="well nav nav-pills nav-stacked nav-sitemenu hide-sm">
+            <li>
+                <a href="/admin/"><i class="fa-fw fa fa-home"></i> 首页</a>
+            </li>
+
+            <li class="nav-header  active">
+
+                资源管理
+
+            </li>
+
+            <li>
+                <a href="/admin/app/emailverifyrecord/">
+                    <i class="fa-fw fa fa-envelope"></i>
+                    邮箱验证</span></a>
+            </li>
+
+            <li>
+                <a href="/app/overview">
+                    <i class="fa-fw fa fa-picture-o"></i>
+                    资源总览</span></a>
+            </li>
+
+            <li>
+                <a href="/admin/app/resource_list/">
+                    <i class="fa-fw fa fa-list"></i>
+                    资源列表</span></a>
+            </li>
+
+            <li class="active">
+                <a href="/admin/app/batch_config/">
+                <i class="fa-fw fa fa-pencil"></i>
+                    批量配置</span></a>
+            </li>
+
+
+            <li class="nav-header ">
+
+                管理
+
+            </li>
+
+            <li>
+                <a href="/admin/xadmin/log/">
+                    <i class="fa-fw fa fa-cog"></i>
+                    日志</span></a>
+            </li>
+
+
+            <li class="nav-header ">
+
+                认证和授权
+
+            </li>
+
+            <li>
+                <a href="/admin/auth/group/">
+                    <i class="fa-fw fa fa-group"></i>
+                    组</span></a>
+            </li>
+
+            <li>
+                <a href="/admin/auth/user/">
+                    <i class="fa-fw fa fa-user"></i>
+                    用户</span></a>
+            </li>
+
+            <li>
+                <a href="/admin/auth/permission/">
+                    <i class="fa-fw fa fa-lock"></i>
+                    权限</span></a>
+            </li>
+
+
+
+        </ul>
+
+
+
+        <ul class="well nav nav-list nav-sitemenu show-sm">
+            <li class="app_menu">
+                <a href="#"><i class="icon fa-fw fa fa-home"></i></a><hr/>
+            </li>
+
+            <li class="app_menu dropdown-submenu  active">
+                <a href="#" class="section">
+                    <i class="icon fa-fw fa fa-circle-o"></i>
+                </a><hr/>
+                <ul class="dropdown-menu">
+
+                    <li class="#">
+                        <a href="#">
+                            <i class="fa-fw fa fa-envelope"></i>
+                            邮箱验证</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-picture-o"></i>
+                            资源总览</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-list"></i>
+                            资源列表</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="app_menu dropdown-submenu ">
+                <a href="#" class="section">
+                    <i class="icon fa-fw fa fa-cog"></i>
+
+                </a><hr/>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-cog"></i>
+                            日志</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="app_menu dropdown-submenu ">
+                <a href="#" class="section">
+                    <i class="icon fa-fw fa fa-lock"></i>
+
+                </a><hr/>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-group"></i>
+                            组</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-user"></i>
+                            用户</span></a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa-fw fa fa-lock"></i>
+                            权限</span></a>
+                    </li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+
+
+
+
+
+    </div>
+    <div class="col-sm-offset-5 col-md-offset-4 col-sm-4 col-md-3">
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	开始进行批量配置
+</button>
+<br/><br/><br/>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					已选择IP
+				</h4>
+			</div>
+			<div class="modal-body">
+                        
+				<table class='table table-striped table-bordered table-hover table-condensed'>
+				<thead>
+				<tr>
+					<th>IP_MDCN</th>
+					<th>IP_MANAGE</th>
+					<th>IP_INTERNAL</th>
+				</tr>
+				</thead>
+ 				<tbody>
+				{% for item in query_result %}
+				    <tr>
+				    {% for value in item.values %}
+				        <td>{{value}}</td>
+				    {% endfor %}
+                                    </tr>
+				{% endfor %}
+				</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" id='button1' onclick="javascript:go()" class="btn btn-primary">
+					下一步
+				</button>
+				<script >
+				function go(){
+				$('#myModal').modal('hide');
+				$('#myModal2').modal('show');
+				}
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#button1").click(function(){
+    var json_data = {{ json_data|safe }}
+    $.post("/app/batch_config",
+    json_data,
+    function(json_data,status){
+    });
+  });
+});
+</script>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2">
+                                        操作参数
+                                </h4>
+                        </div>
+                        <div class="modal-body">
+                                <div class="panel panel-default panel-info">
+                                    <div class="panel-heading">已选择IP</div>
+                                    </div>
+                                <!--div class="panel-body">已选择IP</div-->
+                                    <table class='table table-striped table-bordered table-hover table-condensed'>
+                                    <thead>
+                                    <tr>
+                                            <th>IP_MDCN</th>
+                                            <th>IP_MANAGE</th>
+                                            <th>IP_INTERNAL</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in query_result %}
+                                        <tr>
+                                        {% for value in item.values %}
+                                            <td>{{value}}</td>
+                                        {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    </table>
+                                <div class="panel panel-default panel-info">
+                                    <div class="panel-heading">选择需要执行的模块</div>
+                                    <div class="panel-body">
+                                    <label class="checkbox-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios1" value="option1" checked>shell
+                                    </label>
+                                    <label class="checkbox-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios2" value="option2">script
+                                    </label>
+                                    <label class="checkbox-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option3">other
+                                    <input type="text"></input>
+                                    </label>
+				    </div>
+                                </div><br>
+                                <div class="panel panel-default panel-info">
+                                    <div class="panel-heading">执行参数</div>
+                                    <div class="panel-body">
+				    <input type="text"></input>
+                                     </div>								
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" onclick="javascript:back()"  class="btn btn-default">上一步
+                                </button>
+                                <button type="button" onclick="javascript:go()" class="btn btn-primary">
+                                        下一步
+                                </button>
+                                <script >
+                                function back(){
+                                $('#myModal').modal('show');
+                                $('#myModal2').modal('hide');
+                                }
+                                </script>
+                       </div>
+                </div>
+        </div>
+</div>
+
+
+    </div>
+
+
+<div id="footer">
+    <hr/>
+    <footer class="text-center">
+        <p>&copy; 敏捷小小组</p>
+    </footer>
+</div>
+
+
+<script type="text/javascript" src="/static/xadmin/vendor/jquery-ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="/static/xadmin/vendor/jquery-ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/static/xadmin/vendor/jquery-ui/jquery.ui.mouse.js"></script>
+<script type="text/javascript" src="/static/xadmin/vendor/jquery-ui/jquery.ui.sortable.js"></script>
+<script type="text/javascript" src="/static/xadmin/vendor/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.main.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.responsive.js"></script>
+<script type="text/javascript" src="/static/xadmin/vendor/jquery-ui/jquery.ui.effect.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.plugin.themes.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.plugin.filters.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.page.list.js"></script>
+<script type="text/javascript" src="/static/xadmin/js/xadmin.page.form.js"></script>
+
+</div>
+</body>
+</html>
+
